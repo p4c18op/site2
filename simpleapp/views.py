@@ -2,11 +2,13 @@ from datetime import datetime
 from django.views.generic import ListView, DetailView
 from .models import Product
 
+
 class ProductsList(ListView):
     model = Product
     ordering = 'name'
     template_name = 'products.html'
     context_object_name = 'products'
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
