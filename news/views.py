@@ -7,7 +7,7 @@ class NewsList(ListView):
     ordering = 'name'
     template_name = 'news.html'
     context_object_name = 'news'
-    paginate_by = 2
+    paginate_by = 1
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

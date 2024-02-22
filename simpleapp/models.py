@@ -1,5 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator
+from django.urls import reverse
+
 
 class Product(models.Model):
     name = models.CharField(
@@ -13,14 +15,17 @@ class Product(models.Model):
     category = models.ForeignKey(
         to='Category',
         on_delete=models.CASCADE,
-        related_name='Products',
+        related_name='products',
     )
     price = models.FloatField(
         validators=[MinValueValidator(0.0)],
     )
 
     def __str__(self):
-        return f'{self.name.title()}: {self.description[:20]}'
+        return f'{self.name.title()}: {self.description[:10]}'
+
+    def get_absolute_url(self):
+        return reverse('product_detail', args=[str(self.id)])
 
 
 class Category(models.Model):
