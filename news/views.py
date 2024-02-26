@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import New
@@ -60,3 +61,9 @@ class NewDelete(DeleteView):
     model = New
     template_name = 'new_delete.html'
     success_url = reverse_lazy('new_list')
+
+class NewCreate(LoginRequiredMixin, CreateView):
+    raise_exception = True
+    form_class = NewForm
+    model = New
+    template_name = 'new_edit.html'
